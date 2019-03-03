@@ -11,8 +11,11 @@ using MySql.Data.MySqlClient;
 
 namespace LaundryApp
 {
+
     public partial class MainForm : Form
     {
+        public const int MAX_REACH_ORDERS = 4;
+
         DigitalScale digitalScale;
         ReceiptPrinter printer;
         OrderEntities orderEntities;
@@ -721,34 +724,45 @@ namespace LaundryApp
 
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
-            bool saveResult = SaveOrder();
+            int count = orderEntities.Orders.Count();
 
-            if (saveResult)
+            if (count < MAX_REACH_ORDERS)
             {
-                DialogResult dialogResult = MessageBox.Show("Add order item?", "Order!", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                bool saveResult = SaveOrder();
+
+                if (saveResult)
                 {
-                    itemPanel.Enabled = true;
-                    txtItemName.Focus();
-                }
-                else
-                {
-                    if (isNewRecord)
+                    DialogResult dialogResult = MessageBox.Show("Add order item?", "Order!", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        orderEntities.Orders.Add(order);
-                        orderEntities.SaveChanges();
-
-                        DialogResult printResult = MessageBox.Show("Print Order Receipt?", "Order!", MessageBoxButtons.YesNo);
-                        if (printResult == DialogResult.Yes)
-                        {
-                            printer.SetOrderDetail = order;
-                            printer.PrintAcceptOrder();
-                        }
+                        itemPanel.Enabled = true;
+                        txtItemName.Focus();
                     }
+                    else
+                    {
+                        if (isNewRecord)
+                        {
+                            orderEntities.Orders.Add(order);
+                            orderEntities.SaveChanges();
 
-                    RefreshOrderDataSource();
-                    DefaultFormState();
+                            DialogResult printResult = MessageBox.Show("Print Order Receipt?", "Order!", MessageBoxButtons.YesNo);
+                            if (printResult == DialogResult.Yes)
+                            {
+                                printer.SetOrderDetail = order;
+                                printer.PrintAcceptOrder();
+                            }
+                        }
+
+                        RefreshOrderDataSource();
+                        DefaultFormState();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Maximum reach of records ({count})!", "Order!", MessageBoxButtons.OK);
+                RefreshOrderDataSource();
+                DefaultFormState();
             }
         }
 
