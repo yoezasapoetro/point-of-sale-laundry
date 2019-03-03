@@ -173,7 +173,7 @@ namespace LaundryApp
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //CloseMessage();
+            CloseMessage();
             digitalScale.Close();
             Application.Exit();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
