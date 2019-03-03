@@ -184,6 +184,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migration.cs" />
     <Compile Include="order.cs">
       <DependentUpon>OrderEntities.tt</DependentUpon>
     </Compile>
