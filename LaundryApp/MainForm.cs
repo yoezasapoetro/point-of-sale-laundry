@@ -29,7 +29,7 @@ namespace LaundryApp
         {
             get
             {
-                string connectionString = String.Format("Server=localhost; UID=root; database={0}", "laundryapp");
+                string connectionString = "Server=localhost; UID=pos; Password=ini izip0s; database=laundryapp";
                 return new MySqlConnection(connectionString);
             }
         }
