@@ -628,18 +628,18 @@
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(463, 49);
+            this.btnAddItem.Location = new System.Drawing.Point(476, 36);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(60, 24);
+            this.btnAddItem.Size = new System.Drawing.Size(114, 35);
             this.btnAddItem.TabIndex = 4;
-            this.btnAddItem.Text = "+";
+            this.btnAddItem.Text = "Tambah Item";
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 31);
+            this.label8.Location = new System.Drawing.Point(27, 23);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 17);
             this.label8.TabIndex = 0;
@@ -647,7 +647,7 @@
             // 
             // txtItemPrice
             // 
-            this.txtItemPrice.Location = new System.Drawing.Point(357, 50);
+            this.txtItemPrice.Location = new System.Drawing.Point(361, 42);
             this.txtItemPrice.Name = "txtItemPrice";
             this.txtItemPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtItemPrice.Size = new System.Drawing.Size(100, 22);
@@ -657,7 +657,7 @@
             // 
             // txtItemName
             // 
-            this.txtItemName.Location = new System.Drawing.Point(26, 50);
+            this.txtItemName.Location = new System.Drawing.Point(30, 42);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(269, 22);
             this.txtItemName.TabIndex = 1;
@@ -666,7 +666,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(354, 30);
+            this.label11.Location = new System.Drawing.Point(358, 22);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(103, 17);
             this.label11.TabIndex = 6;
@@ -675,7 +675,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(298, 31);
+            this.label9.Location = new System.Drawing.Point(302, 23);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 17);
             this.label9.TabIndex = 2;
@@ -683,7 +683,7 @@
             // 
             // txtItemQuantity
             // 
-            this.txtItemQuantity.Location = new System.Drawing.Point(301, 50);
+            this.txtItemQuantity.Location = new System.Drawing.Point(305, 42);
             this.txtItemQuantity.Name = "txtItemQuantity";
             this.txtItemQuantity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtItemQuantity.Size = new System.Drawing.Size(50, 22);
