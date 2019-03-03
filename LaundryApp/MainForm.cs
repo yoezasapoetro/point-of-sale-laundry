@@ -383,7 +383,18 @@ namespace LaundryApp
                     txtCustomerName.Focus();
                 }
 
-                MessageBox.Show("Successfully added order", "Order!", MessageBoxButtons.OK);
+                string message = "";
+
+                if (isNewRecord)
+                {
+                    message = "Successfully added order";
+                }
+                else
+                {
+                    message = "Successfully updated order";
+                }
+
+                MessageBox.Show(message, "Order!", MessageBoxButtons.OK);
             }
         }
 
