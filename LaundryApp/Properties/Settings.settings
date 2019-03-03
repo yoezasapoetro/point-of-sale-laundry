@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LaundryApp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TenantName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LaundryApp</Value>
+    </Setting>
+    <Setting Name="TenantPhone" Type="System.String" Scope="User">
+      <Value Profile="(Default)">09090909090</Value>
+    </Setting>
+    <Setting Name="TenantAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Padang, West Sumatera</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
