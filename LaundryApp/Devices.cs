@@ -180,7 +180,7 @@ namespace LaundryApp.Devices
 
         public bool ReceiptPrinterStatus()
         {
-            return printer.State != ControlState.Closed && printer.State == ControlState.Idle;
+            return printer.State != ControlState.Closed && printer.DeviceEnabled == true;
         }
 
         public void Close()
