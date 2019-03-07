@@ -115,10 +115,10 @@ namespace LaundryApp.Devices
             }
             catch (Exception)
             {
-                ClosePosPrinter();
+                Close();
             }
 
-            ClosePosPrinter();
+            Close();
         }
 
         public void PrintPaidOrder(long paid, long subTotal, long change)
@@ -167,10 +167,10 @@ namespace LaundryApp.Devices
             }
             catch (Exception)
             {
-                ClosePosPrinter();
+                Close();
             }
 
-            ClosePosPrinter();
+            Close();
         }
 
         public bool ReceiptPrinterInitialized()
@@ -180,10 +180,10 @@ namespace LaundryApp.Devices
 
         public bool ReceiptPrinterStatus()
         {
-            return printer.State != ControlState.Closed;
+            return printer.State != ControlState.Closed && printer.State == ControlState.Idle;
         }
 
-        protected void ClosePosPrinter()
+        public void Close()
         {
             try
             {
