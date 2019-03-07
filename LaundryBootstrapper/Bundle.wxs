@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define SourceDir="D:\Projects\C#\LaundryApp1\" ?>
+  <?define DB_TargetDir="$(var.SourceDir)packages\"?>
+  <?define Installer_TargetDir="$(var.SourceDir)LaundryAppInstall\bin\Release\"?>
+	<Bundle Name="Laundry App Installer" 
+          Version="1.0.0.0" 
+          Manufacturer="Cimangko Labs"
+          UpgradeCode="b1ab52bd-3f17-463c-a761-c63d13596802">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication LicenseUrl="" LogoFile="Resources\Laundry-icon.ico"/>
+    </BootstrapperApplicationRef>
+
+		<Chain DisableSystemRestore="yes">
+      <MsiPackage DisplayInternalUI="yes" Id="Storage.msi" SourceFile="$(var.DB_TargetDir)Storage.msi" />
+      <MsiPackage DisplayInternalUI="yes" Id="AppInstaller.msi" After="Storage.msi" SourceFile="$(var.Installer_TargetDir)LaundryAppInstall.msi" />
+    </Chain>
+	</Bundle>
+</Wix>
