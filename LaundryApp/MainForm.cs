@@ -22,6 +22,7 @@ namespace LaundryApp
         Order order;
         List<OrderItem> orderItems;
         bool isNewRecord = true;
+        bool databaseServerIdle = false;
 
         delegate void ScaleStreamTextCallback(string scale);
 
@@ -50,7 +51,12 @@ namespace LaundryApp
             if (!orderEntities.Database.Exists())
             {
                 MessageBox.Show("Database not found", "Order!");
+                databaseServerIdle = false;
                 Close();
+            }
+            else
+            {
+                databaseServerIdle = true;
             }
         }
 
@@ -175,6 +181,7 @@ namespace LaundryApp
         {
             CloseMessage();
             digitalScale.Close();
+            printer.Close();
             Application.Exit();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
@@ -184,8 +191,24 @@ namespace LaundryApp
             DialogResult result = MessageBox.Show("Are you sure to exit application?", "LaundryApp Warning!", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                Close();
-                Dispose();
+                if (databaseServerIdle)
+                {
+                    Close();
+                    Dispose();
+                }
+                else
+                {
+                    Application.Exit();
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                }
+            }
+            else
+            {
+                if (!databaseServerIdle)
+                {
+                    Application.Exit();
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                }
             }
         }
 
