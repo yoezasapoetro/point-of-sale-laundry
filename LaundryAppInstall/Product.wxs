@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define LaundryApp_TargetDir=$(var.LaundryApp.TargetDir)?>
+  <?define LaundryApp_SourceDir="$(var.LaundryApp.TargetDir)..\..\..\"?>
+  <?define LaundryApp_LibraryDir="$(var.LaundryApp.TargetDir)..\..\..\..\packages\"?>
+  <?define SetupMigration_TargetDir=$(var.SetupMigration.TargetDir)?>
+	<Product Id="*" Name="LaundryApp" Language="1033" Version="1.0.0.0" Manufacturer="Cimangko Labs" UpgradeCode="df99a38e-826c-4e8c-be8d-94805bc1131d">
+		<Package InstallerVersion="200" 
+             Compressed="yes" 
+             InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="LaundryAppInstall" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+    </UI>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />		
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="Laundry App" />
+			</Directory>
+		</Directory>
+	</Fragment>
+  
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- Main Library Dependencies -->
+      <Component Id="EntityFramework" Guid="fb519982-2d55-4685-91d9-8d2bcc7be7be">
+        <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.LaundryApp_LibraryDir)EntityFramework.SqlServer.dll" />
+        <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.LaundryApp_LibraryDir)EntityFramework.dll" />
+      </Component>
+      <Component Id="Google.Protobuf.dll" Guid="49407333-7ec6-4c3a-9d7b-a7734c4cb692">
+        <File Id="Google.Protobuf.dll" Name="Google.Protobuf.dll" Source="$(var.LaundryApp_LibraryDir)Google.Protobuf.dll" />
+      </Component>
+      <Component Id="Microsoft.PointOfService.dll" Guid="959697b0-1e4e-4e42-983d-664a16329b09">
+        <File Id="Microsoft.PointOfService.dll" Name="Microsoft.PointOfService.dll" Source="$(var.LaundryApp_LibraryDir)Microsoft.PointOfService.dll" />
+      </Component>
+      <Component Id="MySQL.Data" Guid="ebfb7f72-ec79-4da0-ad9b-d67910015558">
+        <File Id="MySql.Data.dll" Name="MySql.Data.dll" Source="$(var.LaundryApp_LibraryDir)MySql.Data.dll" />
+        <File Id="MySql.Data.EntityFramework.dll" Name="MySql.Data.EntityFramework.dll" Source="$(var.LaundryApp_LibraryDir)MySql.Data.EntityFramework.dll" />
+        <File Id="MySQL.Data.EntityFrameworkCore.Design.dll" Name="MySQL.Data.EntityFrameworkCore.Design.dll" Source="$(var.LaundryApp_LibraryDir)MySQL.Data.EntityFrameworkCore.Design.dll" />
+        <File Id="MySQL.Data.EntityFrameworkCore.dll" Name="MySQL.Data.EntityFrameworkCore.dll" Source="$(var.LaundryApp_LibraryDir)MySQL.Data.EntityFrameworkCore.dll" />
+        <File Id="MySql.Web.dll" Name="MySql.Web.dll" Source="$(var.LaundryApp_LibraryDir)MySql.Web.dll" />
+      </Component>
+      
+      <!-- Main File Apps -->
+			<Component Id="SetupMigration" Guid="ba440351-f075-41f9-bdee-f88256e0d9fd">
+			  <File Id="SetupMigration.exe.config" Name="SetupMigration.exe.config" Source="$(var.SetupMigration_TargetDir)SetupMigration.exe.config" />
+			  <File Id="SetupMigration.exe" Name="SetupMigration.exe" Source="$(var.SetupMigration_TargetDir)SetupMigration.exe" />
+			</Component>
+			<Component Id="LaundryApp" Guid="4aac4c31-84ab-479f-8b36-1168432a4939">
+			  <File Id="LaundryApp.exe.config" Name="LaundryApp.exe.config" Source="$(var.LaundryApp_TargetDir)LaundryApp.exe.config" />
+			  <File Id="LaundryApp.exe" Name="LaundryApp.exe" Source="$(var.LaundryApp_TargetDir)LaundryApp.exe" />
+			  <File Id="Laundry_icon.ico" Name="Laundry-icon.ico" Source="$(var.LaundryApp_SourceDir)Laundry-icon.ico" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
