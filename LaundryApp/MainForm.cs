@@ -51,8 +51,9 @@ namespace LaundryApp
             if (!orderEntities.Database.Exists())
             {
                 MessageBox.Show("Database not found", "Order!");
-                databaseServerIdle = false;
-                Close();
+                CloseDevice();
+                Application.Exit();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
             else
             {
@@ -179,11 +180,35 @@ namespace LaundryApp
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseMessage();
-            digitalScale.Close();
-            printer.Close();
-            Application.Exit();
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            if (databaseServerIdle)
+            {
+                CloseMessage();
+            }
+            else
+            {
+                CloseDevice();
+                Application.Exit();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+            }
+        }
+
+        private void CloseDevice()
+        {
+            if (digitalScale != null)
+            {
+                if (digitalScale.ScaleStatus())
+                {
+                    digitalScale.Close();
+                }
+            }
+
+            if (printer != null)
+            {
+                if (printer.ReceiptPrinterStatus())
+                {
+                    printer.Close();
+                }
+            }
         }
 
         private void CloseMessage()
@@ -191,24 +216,7 @@ namespace LaundryApp
             DialogResult result = MessageBox.Show("Are you sure to exit application?", "LaundryApp Warning!", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                if (databaseServerIdle)
-                {
-                    Close();
-                    Dispose();
-                }
-                else
-                {
-                    Application.Exit();
-                    System.Diagnostics.Process.GetCurrentProcess().Kill();
-                }
-            }
-            else
-            {
-                if (!databaseServerIdle)
-                {
-                    Application.Exit();
-                    System.Diagnostics.Process.GetCurrentProcess().Kill();
-                }
+                Dispose();
             }
         }
 
